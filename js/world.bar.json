@@ -1,0 +1,43 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Yearly change of Top 10 country with largest population",
+    "description": "Annual change in the top ten most population countries",
+    "data": {
+      "url": "https://raw.githubusercontent.com/mpan0025/3179/main/world_population.csv"
+    },
+    "transform": [
+      {"filter": {"field": "Country", "oneOf": ["China", "India","Indonesia","Brazil","Bangladesh","Japan","Ethiopia","Egypt","DR Congo","Iran"]}}
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {
+        "field": "Country",
+        "type": "nominal",
+        "sort": {"op": "values", "field": "Yearly_Change"},
+        "axis": {
+          "domain": false,
+          "ticks": false,
+          "labelAngle": 50,
+          "labelPadding": 8
+        }
+      },
+      "y": {
+        "field": "Yearly_Change",
+        "type": "quantitative",
+        "axis": {
+          "gridColor": {
+            "condition": {"test": "datum.Yearly_Change === 0", "value": "black"},
+            "value": "#ddd"
+          }
+        }
+      },
+      "color": {"field": "Country"},
+      "tooltip": [
+          {"field": "Country","type": "nominal"},
+          {"field": "Population", "type": "quantitative"},
+          {"field": "Yearly_Change","type": "quantitative"},
+          {"field": "Net_Change","type": "quantitative"},
+          {"field": "Land_Area","type": "quantitative"}
+        ]
+    }
+  }

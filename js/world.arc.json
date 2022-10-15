@@ -1,0 +1,26 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Share of population in the world",
+    "description": "Percentage of the world's population",
+    "width": 380,
+    "height": 500,
+    "data": {
+      "url": "https://raw.githubusercontent.com/mpan0025/3179/main/world_population.csv"
+    },
+    "params": [
+      {
+      "name": "padAngle",
+      "value": 0,
+      "bind": {"input": "range", "min": 0, "max": 1.57}
+    }
+    ],
+    "mark": {"type": "arc", "padAngle": {"expr": "padAngle"}},
+    "encoding": {
+      "theta": {"field": "World_Share", "type": "quantitative"},
+      "color": {"field": "Country", "type": "nominal"},
+      "tooltip": [
+        {"field": "Country", "type": "nominal"},
+        {"field": "World_Share", "title": "Population share in the world "}
+      ]
+    }
+  }
