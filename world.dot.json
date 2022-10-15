@@ -1,0 +1,132 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 500,
+    "height": 500,
+    "title": "Population Density & Land Area",
+    "data": {
+      "url": "https://raw.githubusercontent.com/mpan0025/3179/main/world_population.csv"
+    },
+    "params": [
+      {
+        "name": "Land_Area",
+        "value": 0,
+        "bind": {
+          "input": "range",
+          "min": 0,
+          "max": 10000000,
+          "step": 1000,
+          "name": "Land Area: "
+        }
+      },
+      {
+        "name": "Country_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "China",
+            "India",
+            "Indonesia",
+            "Brazil",
+            "Bangladesh",
+            "Japan",
+            "Ethiopia",
+            "Egypt",
+            "DR Congo",
+            "Iran"
+          ],
+          "labels": [
+            "All selection",
+            "China",
+            "India",
+            "Indonesia",
+            "Brazil",
+            "Bangladesh",
+            "Japan",
+            "Ethiopia",
+            "Egypt",
+            "DR Congo",
+            "Iran"
+          ],
+          "name": "Country Selection: "
+        }
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "Land_Area",
+        "type": "quantitative",
+        "title": "Land_Area",
+        "axis": {"tickCount": 6},
+        "scale": {"type": "log", "domain": [1, 100000000]}
+      },
+      "y": {
+        "field": "Density",
+        "type": "quantitative",
+        "title": "Population Density",
+        "axis": {"tickCount": 5},
+        "scale": {"type": "log", "domain": [1, 100000]}
+      }
+    },
+    "layer": [
+      {
+        "selection": {
+          "Country Selection": {
+            "type": "multi",
+            "fields": ["Country"],
+            "bind": "legend"
+          }
+        },
+        "mark": "circle",
+        "encoding": {
+          "size": {
+            "field": "Population",
+            "type": "quantitative",
+            "scale": {
+              "type": "threshold",
+              "domain": [10000000, 200000000, 500000000, 800000000, 1000000000],
+              "range": [50, 100, 150, 250, 400]
+            },
+            "legend": {"format": ".2s"}
+          },
+          "color": {"field": "Country", "type": "nominal"},
+          "opacity": {
+            "condition": {"param": "Land Area", "value": 1},
+            "value": 0.1
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Land_Area", "type": "quantitative"},
+            {"field": "Population", "type": "quantitative", "format": ","}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -8,
+          "fontSize": 12,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "Country", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": " datum['Country'] == 'Australia'|| datum['Country'] == 'China'|| datum['Country'] == 'India' ||  datum['Country'] == 'Mexico'||  datum['Country'] == 'Russia'||  datum['Country'] == 'Brazil'||  datum['Country'] == 'Japan'||  datum['Country'] == 'Iceland'|| datum['Country'] == 'Indonesia'",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Land_Area", "type": "quantitative"},
+            {"field": "Density", "type": "quantitative"},
+            {"field": "Population", "type": "quantitative"}
+          ]
+        }
+      }
+    ]
+  }
