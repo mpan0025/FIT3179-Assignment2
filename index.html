@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+    <link href="style.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <style>
+      * {
+        font-family: "Roboto", sans-serif;
+      }
+
+      h1 {
+        font-weight: 550;
+        font-family: "Roboto", sans-serif;
+        color: black;
+        background: rgb(170, 126, 197);
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      h2 {
+        font-weight: 550;
+        background: rgb(170, 126, 197);
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      body {
+        background-color: rgb(194, 192, 196);
+      }
+
+      .page {
+        width: 1000px;
+        background-color: rgb(194, 167, 220);
+        margin: auto;
+        padding: 60px;
+        padding-top: 30px;
+      }
+
+      .vis-container {
+        width: 100%;
+      }
+
+      .description h2,
+      h1 {
+        margin-top: 30px;
+      }
+
+      .description-right {
+        padding-right: 50px;
+      }
+
+      .description-left {
+        padding-left: 50px;
+      }
+
+      .description-bottom {
+        margin-bottom: 50px;
+        display: inline-block;
+      }
+
+      .description-top {
+        margin-top: 20px;
+        display: inline-block;
+      }
+
+      .description-center {
+	    text-align: center;
+      }
+
+      .pure-g {
+        margin-bottom: 50px;
+      }
+    </style>
+
+    <div class="page">
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <h1 style="text-align: center">World population in 2020</h1>
+
+          <p style="text-align: center">
+            Population has always been an issue of concern. The Earth's
+            resources are finite, but the population keeps growing. The
+            following visualisation shows the world population in 2020
+          </p>
+          <p style="text-align: center">
+            Total Population:<font color="green"
+              ><strong>7,794,099,349</strong></font
+            >
+            Land Area: <font color="Blue"><strong>1,192,644</strong></font
+            >.
+          </p>
+        </div>
+      </div>
+
+      <h2>Map of world's Population</h2>
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div id="vis1" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-1">
+          <div class="description description-center">
+            <p style="font-weight: 400">
+              This map shows the population for each Country in 2020. The shade of purple
+              indicates the population size. From the map, we can know that
+              <font color="#402177"><strong>China</strong></font> has the largest population in the world.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <h2>Top 10 country with largest population</h2>
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div id="vis2" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-1">
+          <div class="description description-center">
+            <p style="font-weight: 400">
+              This chart shows the yearly change of the population for top 10
+              Countries. From the chart, we can know that <strong>Japan</strong> has the
+              negative yearly change of the population from 2019 to 2020.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- end pure grid group -->
+
+      <h2>Share of population in the world</h2>
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div id="vis3" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-1">
+          <div class="description description-center">
+            <p style="font-weight: 400">
+              This chart shows the share of the population in the world for each
+              Countries. The size of the pie indicates the share of population. From
+              the chart, we can know that <strong>China</strong> and India has the
+              highest share of population in 2020.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <h2>Population density and Land area for each country</h2>
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div id="vis4" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-1">
+          <div class="description description-center">
+            <p style="font-weight: 400">
+              This chart shows the population density and land area for each country. 
+              The overall trend in this chart is decreasing. 
+              Population density is strongly related to land area, and countries with large land areas are generally less densely populated than countries with small populations. 
+              While total population also has a strong relationship with population density, this chart shows that land area has more of an effect on population density than total population.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+         <div class="description description-center">
+          <p style="font-size: 15px">This visualisation is created by <a href="https://github.com/mpan0025" target="_blank">Mengdi Pan</a>. The datasource is <a href="https://www.kaggle.com/datasets/anandhuh/countries-in-the-world-by-population-2022"
+             target="_blank">Download from Kaggle</href>.</p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+    </div>
+
+    <script>
+      const exe1 = "world.map.json";
+      const exe2 = "world.bar.json";
+      const exe3 = "world.arc.json";
+      const exe4 = "world.dot.json";
+
+      vegaEmbed("#vis1", exe1, { mode: "vega-lite" })
+        .then(console.log)
+        .catch(console.warn);
+      vegaEmbed("#vis2", exe2, { mode: "vega-lite" })
+        .then(console.log)
+        .catch(console.warn);
+      vegaEmbed("#vis3", exe3, { mode: "vega-lite" })
+        .then(console.log)
+        .catch(console.warn);
+      vegaEmbed("#vis4", exe4, { mode: "vega-lite" })
+        .then(console.log)
+        .catch(console.warn);
+    </script>
+  </body>
+</html>

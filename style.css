@@ -1,0 +1,15 @@
+#choropleth_map {
+	top:100px;
+	bottom: 100px; 
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
+
+ :is(#vis1, #vis2, #vis3, #vis4) > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
